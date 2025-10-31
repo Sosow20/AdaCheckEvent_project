@@ -1,53 +1,104 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { Button } from './components/Button'
+import Cards from './components/Cards'
+import Search from './components/Search'
 
-function App() {
-
+export default function App() {
   const [events, setEvents] = useState([])
-  const [showMore, setShowMore] = useState(false)
-  // const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [loadingMore, setLoadingMore] = useState(false)
+  const [offset, setOffset] = useState(0)
+  const [hasMore, setHasMore] = useState(true)
 
-
+  // Chargement initial
   useEffect(() => {
-    fetch('https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/que-faire-a-paris-/records?limit=20')
-      .then((resp) => resp.json())
-      .then((data) => setEvents(data.results))
+    loadEvents(0, true)
   }, [])
 
-  console.log(events)
+  const loadEvents = (currentOffset = offset, isInitialLoad = false) => {
+    const loadingFunction = isInitialLoad ? setLoading : setLoadingMore
+    loadingFunction(true)
 
+    fetch(`https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/que-faire-a-paris-/records?limit=6&offset=${currentOffset}`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log("Données reçues:", data)
+        
+        if (data.results && data.results.length > 0) {
+          if (isInitialLoad) {
+            setEvents(data.results)
+          } else {
+            setEvents(prev => [...prev, ...data.results])
+          }
+          setOffset(currentOffset + 6)
+          
+          // Vérifier s'il reste des données à charger
+          if (data.results.length < 6) {
+            setHasMore(false)
+          }
+        } else {
+          setHasMore(false)
+        }
+        
+        loadingFunction(false)
+      })
+      .catch((error) => {
+        console.error("Erreur:", error)
+        loadingFunction(false)
+      })
+  }
+
+  const loadMoreEvents = () => {
+    loadEvents(offset, false)
+  }
+
+  if (loading) return <div className="App">Chargement des événements...</div>
 
   return (
-    <>
+    <div className="App">
+      <Search/>
+      
       <ul>
-        {events.map((data, index) =>
-          <li key={index}>
-
-            <h1> {data.title} </h1>
-            <img src={data.cover_url} alt="" />
-            <a href={data.access_link}>{data.access_link_text}</a>
-            <p>{data.address_city} {data.adress_name} {data.adresse_street} {data.adresse_zipcode}</p>
-            <a href={data.contact_url}>{data.contact_url_text}</a>
-            <p>{data.cover_alt}</p>
-            <p>{data.cover_credit}</p>
-            <p>{data.description}</p>
-            <Button text={"See more"} />
-            <p>{data.lead_text}</p>
-            <p>{data.price_type}</p>
-            <p>{data.title}</p>
-            <p>{data.title_event}</p>
-            <p>{data.transport}</p>
-            <p>{data.updated_at}</p>
-            <a href={data.url} ></a>
-            <p>{data.qfap_tags}</p>
-            <p>{data.audience}</p>
-            <p>{data.date_end}{data.date_start}</p>
+        {events.map((data, index) => (
+          <li key={data.id || index}>
+            <Cards data={data} />
           </li>
-        )}
+        ))}
       </ul>
-    </>
+
+      {hasMore && (
+        <div>
+          <button 
+            onClick={loadMoreEvents}
+            disabled={loadingMore}
+          >
+            {loadingMore ? (
+              <>
+                <span>Chargement en cours...</span>
+                <span>⏳</span>
+              </>
+            ) : (
+              <>
+                <span>Charger 20 événements supplémentaires</span>
+ 
+              </>
+            )}
+          </button>
+        </div>
+      )}
+
+      {!hasMore && events.length > 0 && (
+        <div>
+          <p> Tous les événements ont été chargés !</p>
+          <p>Vous avez chargé {events.length} événements au total.</p>
+        </div>
+      )}
+
+      {!loading && events.length === 0 && (
+        <div>
+          <p>Aucun événement trouvé</p>
+        </div>
+      )}
+    </div>
   )
 }
-
-export default App
