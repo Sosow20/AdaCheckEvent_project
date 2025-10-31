@@ -3,42 +3,105 @@ import './App.css'
 import Cards from './components/Cards'
 import Search from './components/Search'
 
-
 export default function App() {
-
   const [events, setEvents] = useState([])
   const [search, setSearch] = useState("")
+  const [loading, setLoading] = useState(true)
+  const [loadingMore, setLoadingMore] = useState(false)
+  const [offset, setOffset] = useState(0)
+  const [hasMore, setHasMore] = useState(true)
 
-  useEffect(() => {
-    fetch('https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/que-faire-a-paris-/records?limit=100')
+  fetch(`https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/que-faire-a-paris-/records?limit=6&offset=${currentOffset}`)
     .then((resp) => resp.json())
     .then((data) => {
-        console.log(data)
-        setEvents(data.results)
-      })
-      .catch((error) => {
-      console.error("Erreur lors du fetch :", error)})
-  }, [])
+      console.log("Données reçues:", data)
 
-  console.log(events)
+      if (data.results && data.results.length > 0) {
+        if (isInitialLoad) {
+          setEvents(data.results)
+        } else {
+          setEvents(prev => [...prev, ...data.results])
+        }
+        setOffset(currentOffset + 6)
 
-   const filterData = events.filter((data) => 
+        // Vérifier s'il reste des données à charger
+        if (data.results.length < 6) {
+          setHasMore(false)
+        }
+      } else {
+        setHasMore(false)
+      }
+
+      loadingFunction(false)
+    })
+    .catch((error) => {
+      console.error("Erreur:", error)
+      loadingFunction(false)
+    })
+}
+
+
+const loadEvents = (currentOffset = offset, isInitialLoad = false) => {
+  const loadingFunction = isInitialLoad ? setLoading : setLoadingMore
+  loadingFunction(true)
+
+  const filterData = events.filter((data) =>
     data.title.toLowerCase().includes(search.toLowerCase()))
 
   const dataList = filterData.map((data, index) =>
-          <li key={index}>
-            <Cards
-            data={data}
-            />
-          </li>
-        ) 
+    <li key={index}>
+      <Cards
+        data={data}
+      />
+    </li>
+  )
+
+  const loadMoreEvents = () => {
+    loadEvents(offset, false)
+  }
+
+  if (loading) return <div className="App">Chargement des événements...</div>
 
   return (
-    <>
-    <Search search={search} setSearch={setSearch}/>
+    <div className="App">
+      <Search search={search} setSearch={setSearch} />
       <ul>
-      {dataList}
+        {dataList}
       </ul>
-    </>
+
+      {hasMore && (
+        <div>
+          <button
+            onClick={loadMoreEvents}
+            disabled={loadingMore}
+          >
+            {loadingMore ? (
+              <>
+                <span>Chargement en cours...</span>
+                <span>⏳</span>
+              </>
+            ) : (
+              <>
+                <span>Charger 20 événements supplémentaires</span>
+
+              </>
+            )}
+          </button>
+        </div>
+      )}
+
+      {!hasMore && events.length > 0 && (
+        <div>
+          <p> Tous les événements ont été chargés !</p>
+          <p>Vous avez chargé {events.length} événements au total.</p>
+        </div>
+      )}
+
+      {!loading && events.length === 0 && (
+        <div>
+          <p>Aucun événement trouvé</p>
+        </div>
+      )}
+    </div>
   )
 }
