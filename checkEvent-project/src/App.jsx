@@ -11,50 +11,45 @@ export default function App() {
   const [offset, setOffset] = useState(0)
   const [hasMore, setHasMore] = useState(true)
 
-  fetch(`https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/que-faire-a-paris-/records?limit=6&offset=${currentOffset}`)
-    .then((resp) => resp.json())
-    .then((data) => {
-      console.log("Données reçues:", data)
-
-      if (data.results && data.results.length > 0) {
-        if (isInitialLoad) {
-          setEvents(data.results)
-        } else {
-          setEvents(prev => [...prev, ...data.results])
-        }
-        setOffset(currentOffset + 6)
-
-        // Vérifier s'il reste des données à charger
-        if (data.results.length < 6) {
-          setHasMore(false)
-        }
-      } else {
-        setHasMore(false)
-      }
-
-      loadingFunction(false)
-    })
-    .catch((error) => {
-      console.error("Erreur:", error)
-      loadingFunction(false)
-    })
-}
-
-
-const loadEvents = (currentOffset = offset, isInitialLoad = false) => {
-  const loadingFunction = isInitialLoad ? setLoading : setLoadingMore
-  loadingFunction(true)
+  useEffect(() => {
+    loadEvents(0, true)
+  }, [])
 
   const filterData = events.filter((data) =>
     data.title.toLowerCase().includes(search.toLowerCase()))
 
-  const dataList = filterData.map((data, index) =>
-    <li key={index}>
-      <Cards
-        data={data}
-      />
-    </li>
-  )
+  const loadEvents = (currentOffset = offset, isInitialLoad = false) => {
+    const loadingFunction = isInitialLoad ? setLoading : setLoadingMore
+    loadingFunction(true)
+
+    fetch(`https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/que-faire-a-paris-/records?limit=6&offset=${currentOffset}`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log("Données reçues:", data)
+
+        if (data.results && data.results.length > 0) {
+          if (isInitialLoad) {
+            setEvents(data.results)
+          } else {
+            setEvents(prev => [...prev, ...data.results])
+          }
+          setOffset(currentOffset + 6)
+
+          // Vérifier s'il reste des données à charger
+          if (data.results.length < 6) {
+            setHasMore(false)
+          }
+        } else {
+          setHasMore(false)
+        }
+
+        loadingFunction(false)
+      })
+      .catch((error) => {
+        console.error("Erreur:", error)
+        loadingFunction(false)
+      })
+  }
 
   const loadMoreEvents = () => {
     loadEvents(offset, false)
@@ -65,8 +60,13 @@ const loadEvents = (currentOffset = offset, isInitialLoad = false) => {
   return (
     <div className="App">
       <Search search={search} setSearch={setSearch} />
+
       <ul>
-        {dataList}
+        {filterData.map((data, index) => (
+          <li key={data.id || index}>
+            <Cards data={data} />
+          </li>
+        ))}
       </ul>
 
       {hasMore && (
