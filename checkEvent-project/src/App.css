@@ -1,53 +1,7 @@
 @import "tailwindcss";
 
-#root {
-
-
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-
-  font-size: 10px;
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-img{
-
-  height: 100px;
-}
-
-.card{
-  background-color: aliceblue;
-  width: 13vw;
-
-  ul {
-    li{
-    display: flex;
-    justify-content: center;
-    gap: 2rem;}
-  }
-
-}
-
-    .descrpBox{
-      background-color: rgb(228, 162, 236);
-      padding: 1rem;
-      border: 1px solid black;
-      border-radius: 1rem;
-    }
-
-    .searchBar{
-      display: flex;
-      gap: 1rem;
-      input{
-        border: 1px solid black;
-      }
-     
-    }
-     button{
-        cursor: pointer;
-        border: 1px solid black;
-        padding: 2px;
-        border-radius: 5px;
-        border: 1px solid black;
-      }

@@ -2,10 +2,17 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Cards from './components/Cards'
 import Search from './components/Search'
+import { Footer } from './components/Footer'
+import { Modal } from './components/Modal'
+
 
 export default function App() {
   const [events, setEvents] = useState([])
   const [search, setSearch] = useState("")
+
+  const [selectedEvent, setSelectedEvent] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   const [loading, setLoading] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
   const [offset, setOffset] = useState(0)
@@ -15,14 +22,21 @@ export default function App() {
     loadEvents(0, true)
   }, [])
 
-  const filterData = events.filter((data) =>
-    data.title.toLowerCase().includes(search.toLowerCase()))
+  const filterData = events.filter((data) => {
+
+    const title = data.title || "";
+    const tags = data.qfap_tags || "";
+    return (
+      title.toLowerCase().includes(search.toLowerCase()) ||
+      tags.toLowerCase().includes(search.toLowerCase())
+    )
+  })
 
   const loadEvents = (currentOffset = offset, isInitialLoad = false) => {
-    const loadingFunction = isInitialLoad ? setLoading : setLoadingMore
-    loadingFunction(true)
+  const loadingFunction = isInitialLoad ? setLoading : setLoadingMore
+  loadingFunction(true)
 
-    fetch(`https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/que-faire-a-paris-/records?limit=6&offset=${currentOffset}`)
+    fetch(`https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/que-faire-a-paris-/records?limit=8&offset=${currentOffset}`)
       .then((resp) => resp.json())
       .then((data) => {
         console.log("Données reçues:", data)
@@ -58,22 +72,27 @@ export default function App() {
   if (loading) return <div className="App">Chargement des événements...</div>
 
   return (
-    <div className="App">
+    <div>
       <Search search={search} setSearch={setSearch} />
-
-      <ul>
+      {/* bg-cover bg-[url(./assets/triangles.svg)] */}
+      <ul className="bg-white grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 p-8">
         {filterData.map((data, index) => (
-          <li key={data.id || index}>
-            <Cards data={data} />
+          <li key={`${data.recorded}-${index}`}>
+            <Cards data={data}
+              onOpenModal={(eventData) => {
+              setSelectedEvent(eventData)
+              setIsModalOpen(true)
+              }} />
           </li>
         ))}
       </ul>
 
       {hasMore && (
-        <div>
+        <div className="flex justify-center mt-6 p-4">
           <button
             onClick={loadMoreEvents}
             disabled={loadingMore}
+            className="bg-[#ff9b29] text-white px-6 py-2 rounded hover:bg-[#c37721] disabled:opacity-50 cursor-pointer flex justify-center"
           >
             {loadingMore ? (
               <>
@@ -82,7 +101,7 @@ export default function App() {
               </>
             ) : (
               <>
-                <span>Charger 20 événements supplémentaires</span>
+                <span>Charger 8 événements supplémentaires</span>
 
               </>
             )}
@@ -102,6 +121,12 @@ export default function App() {
           <p>Aucun événement trouvé</p>
         </div>
       )}
+
+
+      {isModalOpen && selectedEvent && (
+      <Modal data={selectedEvent} onClose={() => setIsModalOpen(false)} />
+      )}
+      <Footer />
     </div>
   )
 }

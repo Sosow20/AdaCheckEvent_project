@@ -1,4 +1,4 @@
-export default function Search({search, setSearch}) {
+export default function Search({ search, setSearch }) {
 
     const handleOnChange = (e) => {
         setSearch(e.target.value)
@@ -6,11 +6,12 @@ export default function Search({search, setSearch}) {
 
     return (
         <>
-        <div>
-            <label htmlFor=""> <strong> Recherche </strong></label>
-            <input class=' w-50 p-2 border-4 border-double' value={search} type="text" placeholder="Entrer texte ..." onChange={handleOnChange}/>
-        </div>
+            <div className="bg-white flex justify-center gap-2 border-b-5  border-double">
+                <div className="searchBox p-2">
+                    <label htmlFor=""> <strong> Rechercher </strong></label>
+                    <input value={search} type="text" placeholder="Entrer texte ..." onChange={handleOnChange} className="bg-[#ffffff] border-2 border-black p-1" />
+                </div>
+            </div>
         </>
-
     )
 }
