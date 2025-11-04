@@ -4,6 +4,8 @@ import Cards from './components/Cards'
 import Search from './components/Search'
 import { Footer } from './components/Footer'
 import { Modal } from './components/Modal'
+import FilterTheme from './components/FilterTheme'
+import Calendar from './components/Calendar'
 
 
 export default function App() {
@@ -74,6 +76,8 @@ export default function App() {
   return (
     <div>
       <Search search={search} setSearch={setSearch} />
+         <FilterTheme />
+         <Calendar/>
       {/* bg-cover bg-[url(./assets/triangles.svg)] */}
       <ul className="bg-white grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 p-8">
         {filterData.map((data, index) => (
