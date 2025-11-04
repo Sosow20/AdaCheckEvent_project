@@ -1,7 +1,7 @@
 import parse from 'html-react-parser';
 import { useState } from 'react';
 
-export function Button({ description }) {
+export function Button({ description}) {
   const [isOpen, setIsOpen] = useState(false);
   if (!description) return null;
 

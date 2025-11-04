@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Cards from './components/Cards'
 import Search from './components/Search'
+import FilterDate from './components/FilterDate'
 
 export default function App() {
   const [events, setEvents] = useState([])
