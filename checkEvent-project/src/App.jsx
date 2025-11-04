@@ -4,6 +4,7 @@ import Cards from './components/Cards'
 import Search from './components/Search'
 import { Footer } from './components/Footer'
 import { Modal } from './components/Modal'
+import { HeroBanner } from './components/HeroBanner'
 
 
 export default function App() {
@@ -72,10 +73,10 @@ export default function App() {
   if (loading) return <div className="App">Chargement des événements...</div>
 
   return (
-    <div>
+    <div className='Page bg-repeat bg-[url(./assets/star.svg)]'>
+      <HeroBanner/>
       <Search search={search} setSearch={setSearch} />
-      {/* bg-cover bg-[url(./assets/triangles.svg)] */}
-      <ul className="bg-white grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 p-8">
+      <ul className=" Cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 p-8">
         {filterData.map((data, index) => (
           <li key={`${data.recorded}-${index}`}>
             <Cards data={data}
@@ -88,7 +89,7 @@ export default function App() {
       </ul>
 
       {hasMore && (
-        <div className="flex justify-center mt-6 p-4">
+        <div className=" btn_Zone flex justify-center mt-6 p-4">
           <button
             onClick={loadMoreEvents}
             disabled={loadingMore}
