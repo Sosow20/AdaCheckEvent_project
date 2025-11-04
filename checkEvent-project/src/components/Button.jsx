@@ -12,7 +12,7 @@ export function Button({ description}) {
   return (
     <div className="descrpBox">
       <div>{isOpen ? parse(description) : parse(preview)}</div>
-      <button className='font-black cursor-pointer' onClick={() => setIsOpen(!isOpen)}>
+      <button className='cursor-pointer border-2 p-1 rounded-sm border-[#5a7eb1] bg-blue-300 text-blue-950 hover:text-white' onClick={() => setIsOpen(!isOpen)}>
         {isOpen ? "See less" : "See more"}
       </button>
     </div>
