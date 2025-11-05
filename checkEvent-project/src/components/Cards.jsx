@@ -27,7 +27,6 @@ export default function Cards({ data, onOpenModal }) {
                     }
 
                 </button>
-²
                 {data.title && <h1 className="text-lg font-bold mb-2 place-self-center-safe"><strong>{data.title}</strong></h1>}
                 <div>
                     {data.cover_url && (<img className="w-full h-48 object-cover rounded-md mb-4" src={data.cover_url} />)}
