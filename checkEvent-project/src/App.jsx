@@ -4,12 +4,9 @@ import Cards from './components/Cards'
 import Search from './components/Search'
 import { Footer } from './components/Footer'
 import { Modal } from './components/Modal'
-<<<<<<< HEAD
 import FilterTheme from './components/FilterTheme'
 import Calendar from './components/Calendar'
-=======
 import { HeroBanner } from './components/HeroBanner'
->>>>>>> 902def2c6e9bde423c5188a324b5b0884bf18fcc
 
 
 export default function App() {

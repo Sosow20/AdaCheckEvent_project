@@ -4,26 +4,26 @@ function FilterTheme() {
   const [theme, setTheme] = useState('');
 
   return (
-    <div className='flex gap-3 justify-center pt-8'>
+    <div className='flex flex-wrap gap-2 sm:gap-3 justify-center pt-6 sm:pt-8 px-2'>
     
 
-      <button className="bg-white hover:bg-gray-100  text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow inline-flex gap-1 items-center m-px">Sports
+      <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold text-lg py-4 px-8 border border-gray-400 rounded shadow inline-flex gap-1 items-center m-1 ">Sports
  <svg stroke="currentColor" fill="currentColor" strokeWidth={0} viewBox="0 0 512 512" height="1em" width="1em"><path d="M338.8 31.81c-5 19.51-9.9 38.69-14.9 57.64-45.3 7.27-90.5 7.28-135.8 0-5-18.95-9.9-38.13-14.9-57.64 54.9 22.58 110.7 22.58 165.6 0zm17.3 4.59l34.4 45.95c-14 96.25-40 204.15-77.5 302.95-10.7-12.4-25.2-21.3-41.8-24.7 28.3-111.3 56.6-212.3 84.9-324.2zm-200.2 0c28.3 111.9 56.6 212.9 84.9 324.2-16.6 3.4-31.1 12.3-41.8 24.7-37.5-98.8-63.5-206.7-77.5-302.95zM256 377c31.6 0 57 25.4 57 57s-25.4 57-57 57-57-25.4-57-57 25.4-57 57-57z" /></svg>
  </button>
 
-     <button className="bg-white hover:bg-gray-100  text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow inline-flex gap-1 items-center m-px"> Musique
+     <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold text-lg py-4 px-8 border border-gray-400 rounded shadow inline-flex gap-1 items-center m-1 "> Musique
 <svg stroke="currentColor" fill="currentColor" strokeWidth={0} viewBox="0 0 16 16" height="1em" width="1em"><path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z" /><path fillRule="evenodd" d="M9 3v10H8V3h1z" clipRule="evenodd" /><path d="M8 2.82a1 1 0 01.804-.98l3-.6A1 1 0 0113 2.22V4L8 5V2.82z" /></svg>
  </button>
 
-       <button className="bg-white hover:bg-gray-100  text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow inline-flex gap-1 items-center m-px">Cinéma
+       <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold text-lg py-4 px-8 border border-gray-400 rounded shadow inline-flex gap-1 items-center m-1 ">Cinéma
     <svg stroke="currentColor" fill="currentColor" strokeWidth={0} viewBox="0 0 24 24" height="1em" width="1em"><path d="M18,11c0-0.959-0.68-1.761-1.581-1.954C16.779,8.445,17,7.75,17,7c0-2.206-1.794-4-4-4c-1.517,0-2.821,0.857-3.5,2.104 C8.821,3.857,7.517,3,6,3C3.794,3,2,4.794,2,7c0,0.902,0.312,1.727,0.817,2.396C2.324,9.761,2,10.342,2,11v8c0,1.103,0.897,2,2,2 h12c1.103,0,2-0.897,2-2v-2.638l4,2v-7l-4,2V11z M13,5c1.103,0,2,0.897,2,2s-0.897,2-2,2s-2-0.897-2-2S11.897,5,13,5z M6,5 c1.103,0,2,0.897,2,2S7.103,9,6,9S4,8.103,4,7S4.897,5,6,5z M4,19v-8h12l0.002,8H4z" /></svg>
     </button>
 
-       <button className="bg-white hover:bg-gray-100  text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow inline-flex gap-1 items-center m-px">Théâtre
+       <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold text-lg py-4 px-8 border border-gray-400 rounded shadow inline-flex gap-1 items-center m-1 ">Théâtre
  <svg stroke="currentColor" fill="currentColor" strokeWidth={0} viewBox="0 0 640 512" height="1em" width="1em"><path d="M206.86 245.15c-35.88 10.45-59.95 41.2-57.53 74.1 11.4-12.72 28.81-23.7 49.9-30.92l7.63-43.18zM95.81 295L64.08 115.49c-.29-1.62.28-2.62.24-2.65 57.76-32.06 123.12-49.01 189.01-49.01 1.61 0 3.23.17 4.85.19 13.95-13.47 31.73-22.83 51.59-26 18.89-3.02 38.05-4.55 57.18-5.32-9.99-13.95-24.48-24.23-41.77-27C301.27 1.89 277.24 0 25.32 0 176.66 0 101.02 19.42 33.2 57.06 9.03 70.48-3.92 98.48 1.05 126.58l31.73 179.51c14.23 80.52 136.33 142.08 204.45 142.08 3.59 0 6.75-.46 10.01-.8-13.52-17.08-28.94-40.48-39.5-67.58-47.61-12.98-106.06-51.62-111.93-84.79zm97.55-137.46c-.73-4.12-2.23-7.87-4.07-11.4-8.25 8.91-20.67 15.75-35.32 18.32-14.65 2.58-28.67.4-39.48-5.17-.52 3.94-.64 7.98.09 12.1 3.84 21.7 24.58 36.19 46.34 32.37 21.75-3.82 36.28-24.52 32.44-46.22zM606.8 120.9c-88.98-49.38-191.43-67.41-291.98-51.35-27.31 4.36-49.08 26.26-54.04 54.36l-31.73 179.51c-15.39 87.05 95.28 196.27 158.31 207.35 63.03 11.09 204.47-53.79 219.86-140.84l31.73-179.51c4.97-28.11-7.98-56.11-32.15-69.52zm-273.24 96.8c3.84-21.7 24.58-36.19 46.34-32.36 21.76 3.83 36.28 24.52 32.45 46.22-.73 4.12-2.23 7.87-4.07 11.4-8.25-8.91-20.67-15.75-35.32-18.32-14.65-2.58-28.67-.4-39.48 5.17-.53-3.95-.65-7.99.08-12.11zm70.47 198.76c-55.68-9.79-93.52-59.27-89.04-112.9 20.6 25.54 56.21 46.17 99.49 53.78 43.28 7.61 83.82.37 111.93-16.6-14.18 51.94-66.71 85.51-122.38 75.72zm130.3-151.34c-8.25-8.91-20.68-15.75-35.33-18.32-14.65-2.58-28.67-.4-39.48 5.17-.52-3.94-.64-7.98.09-12.1 3.84-21.7 24.58-36.19 46.34-32.37 21.75 3.83 36.28 24.52 32.45 46.22-.73 4.13-2.23 7.88-4.07 11.4z" /></svg>
 </button>
 
- <button className="bg-white hover:bg-gray-100  text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow inline-flex gap-1 items-center m-px">Culture
+ <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold text-lg py-4 px-8 border border-gray-400 rounded shadow inline-flex gap-1 items-center m-1 ">Culture
          <svg stroke="currentColor" fill="currentColor" strokeWidth={0} viewBox="0 0 24 24" height="1em" width="1em"><path d="M21.977,13.783l-2-9C19.874,4.326,19.469,4,19,4h-3v2h2.198l0.961,4.326C18.645,10.121,18.087,10,17.5,10 c-1.953,0-3.603,1.258-4.224,3h-2.553c-0.621-1.742-2.271-3-4.224-3c-0.587,0-1.145,0.121-1.659,0.326L5.802,6H8V4H5 C4.531,4,4.125,4.326,4.024,4.783l-2,9l0.047,0.011C2.035,14.025,2,14.258,2,14.5C2,16.981,4.019,19,6.5,19 c2.31,0,4.197-1.756,4.449-4h2.102c0.252,2.244,2.139,4,4.449,4c2.481,0,4.5-2.019,4.5-4.5c0-0.242-0.034-0.475-0.071-0.706 L21.977,13.783z M6.5,17C5.122,17,4,15.878,4,14.5S5.122,12,6.5,12S9,13.122,9,14.5S7.878,17,6.5,17z M17.5,17 c-1.379,0-2.5-1.122-2.5-2.5s1.121-2.5,2.5-2.5s2.5,1.122,2.5,2.5S18.879,17,17.5,17z" /></svg>
      </button>
 
