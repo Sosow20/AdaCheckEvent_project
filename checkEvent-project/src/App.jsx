@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import Cards from './components/Cards'
-import Search from './components/Search'
+import NavBar from './components/NavBar'
 import { Footer } from './components/Footer'
 import { Modal } from './components/Modal'
 import FilterTheme from './components/FilterTheme'
 import Calendar from './components/Calendar'
-import { HeroBanner } from './components/HeroBanner'
 
 
 export default function App() {
@@ -76,8 +75,7 @@ export default function App() {
 
   return (
     <div className='Page bg-repeat bg-[url(./assets/star.svg)]'>
-      <HeroBanner/>
-      <Search search={search} setSearch={setSearch} />
+      <NavBar search={search} setSearch={setSearch} />
          <FilterTheme />
          <Calendar/>
       <ul className=" Cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 p-8">
@@ -93,11 +91,11 @@ export default function App() {
       </ul>
 
       {hasMore && (
-        <div className=" btn_Zone flex justify-center mt-6 p-4">
+        <div className=" btn_Zone flex place-content-center p-4">
           <button
             onClick={loadMoreEvents}
             disabled={loadingMore}
-            className="bg-[#ff9b29] text-white px-6 py-2 rounded hover:bg-[#c37721] disabled:opacity-50 cursor-pointer flex justify-center"
+            className="bg-[#ff9e27] font-semibold text-white px-6 py-2 rounded  disabled:opacity-50 cursor-pointer "
           >
             {loadingMore ? (
               <>

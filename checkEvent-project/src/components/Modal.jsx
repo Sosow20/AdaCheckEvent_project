@@ -8,7 +8,7 @@ export function Modal({ data, onClose }) {
     return (
         <div className="modal fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
             <div className="overlay w-full h-full bg-[#000000d6] absolute top-0 left-0" onClick={onClose} ></div>
-            <div className="modal-content bg-white p-6 rounded-lg z-10 max-w-lg w-full relative overflow-auto max-h-[90vh]">
+            <div className="modal-content bg-white p-6 rounded-lg z-10 max-w-lg lg:w-full relative overflow-auto max-h-[90vh] md:w-md sm:w-sm">
                 <button
                     className="closeModal absolute top-2 right-2 text-xl font-bold cursor-pointer"
                     onClick={onClose}>
@@ -16,10 +16,10 @@ export function Modal({ data, onClose }) {
                 </button>
                 {data.address_name && <p><strong>Lieu:</strong> {data.address_name}</p>}
                 {data.address_street && data.address_zipcode && data.address_city && (
-                    <p><strong>Adresse:</strong> {data.address_street}, {data.address_zipcode} {data.address_city}</p>
+                <p><strong>Adresse:</strong> {data.address_street}, {data.address_zipcode} {data.address_city}</p>
                 )}
                 <br />
-                {data.description && <Button description={data.description} price={data.price_detail} />}
+                {data.description && <Button description={data.description}/>}
                 {data.price_type && <p><strong>Accès:</strong> {data.price_type}</p>}
                 {data.price_detail && <div><strong>Tarifs:</strong> {parse(data.price_detail)}</div>}
                 {data.transport && <div><strong>Transport:</strong> {parse(data.transport)}</div>}

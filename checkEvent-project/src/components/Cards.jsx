@@ -10,10 +10,10 @@ export default function Cards({ data, onOpenModal }) {
 
     return (
         <>
-            <div className=" CardsComponent bg-[#ffffffee] rounded-lg shadow-md p-2 flex flex-col h-full gap-2">
+            <div className=" CardsComponent bg-[#ffffffee] rounded-lg shadow-md p-2 flex flex-col h-full gap-1">
                 <button
                     type="button"
-                    className=" text-gray-400 hover:text-yellow-400 hover:fill-current transition-colors cursor-pointer flex justify-end"
+                    className=" text-gray-400 hover:text-[#ff9e27] hover:fill-current transition-colors cursor-pointer flex justify-end"
                     aria-label="Bookmark" onClick={() => setAddFavorite(!addFavorite)}
                 >
                     {addFavorite ?
@@ -27,16 +27,14 @@ export default function Cards({ data, onOpenModal }) {
                     }
 
                 </button>
-
-
-                {data.title && <h1 className="text-lg font-bold mb-2"><strong>{data.title}</strong></h1>}
-                {data.cover_url && (<img className="w-full h-48 object-cover rounded-md mb-4" src={data.cover_url} />)}
-                {data.cover_credit && <p> &copy; {parse(data.cover_credit.replace(/(©|copyright)/gi, ''))}</p>}
-                {data.lead_text && <p><strong>Résumé: </strong>{data.lead_text}</p>}
+²
+                {data.title && <h1 className="text-lg font-bold mb-2 place-self-center-safe"><strong>{data.title}</strong></h1>}
                 <div>
+                    {data.cover_url && (<img className="w-full h-48 object-cover rounded-md mb-4" src={data.cover_url} />)}
+                    {data.cover_credit && <p className='place-self-end'> &copy; {parse(data.cover_credit.replace(/(©|copyright)/gi, ''))}</p>}
                 </div>
-
-                <button className='border-2 rounded-xl cursor-pointer hover:bg-yellow-400 mt-auto' onClick={() => onOpenModal(data)}>
+                {data.lead_text && <p className='mt-auto'>{data.lead_text}</p>}
+                <button className='border-2 rounded-xl cursor-pointer text-white bg-[#1B3238] hover:bg-[#ff9e27] mt-auto p-2' onClick={() => onOpenModal(data)}>
                     En savoir Plus
                 </button>
             </div>
