@@ -10,7 +10,7 @@ export default function Cards({ data, onOpenModal }) {
 
     return (
         <>
-            <div className=" CardsComponent bg-[#ffffffee] rounded-lg shadow-md p-2 flex flex-col h-full gap-1">
+            <div className=" CardsComponent bg-[#ffffff] rounded-lg shadow-md p-2 flex flex-col h-full gap-1 hover:duration-500 lg:hover:scale-105  hover:shadow-black hover:shadow-2xl  text-center">
                 <button
                     type="button"
                     className=" text-gray-400 hover:text-[#ff9e27] hover:fill-current transition-colors cursor-pointer flex justify-end"
@@ -30,10 +30,10 @@ export default function Cards({ data, onOpenModal }) {
                 {data.title && <h1 className="text-lg font-bold mb-2 place-self-center-safe"><strong>{data.title}</strong></h1>}
                 <div>
                     {data.cover_url && (<img className="w-full h-48 object-cover rounded-md mb-4" src={data.cover_url} />)}
-                    {data.cover_credit && <p className='place-self-end'> &copy; {parse(data.cover_credit.replace(/(©|copyright)/gi, ''))}</p>}
+                    {data.cover_credit && <p className='place-self-end text-sm'> &copy; {parse(data.cover_credit.replace(/(©|copyright)/gi, ''))}</p>}
                 </div>
                 {data.lead_text && <p className='mt-auto'>{data.lead_text}</p>}
-                <button className='border-2 rounded-xl cursor-pointer text-white bg-[#1B3238] hover:bg-[#ff9e27] mt-auto p-2' onClick={() => onOpenModal(data)}>
+                <button className=' rounded-xl cursor-pointer text-white bg-[#1B3238] hover:bg-[#ff9e27] mt-auto p-2' onClick={() => onOpenModal(data)}>
                     En savoir Plus
                 </button>
             </div>

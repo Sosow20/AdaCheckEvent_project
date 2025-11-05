@@ -20,21 +20,23 @@ export function Modal({ data, onClose }) {
                 )}
                 <br />
                 {data.description && <Button description={data.description}/>}
+                <br />
                 {data.price_type && <p><strong>Accès:</strong> {data.price_type}</p>}
+                {data.audience && <p><strong>Type de public:</strong> {data.audience}</p>}
+                <br />
                 {data.price_detail && <div><strong>Tarifs:</strong> {parse(data.price_detail)}</div>}
                 {data.transport && <div><strong>Transport:</strong> {parse(data.transport)}</div>}
-                <br />
                 <ul>
                     {data.access_link && data.access_link_text && <li><a href={data.access_link}>{data.access_link_text}</a></li>}
-                    {data.url && <li><a href={data.url}><strong>Lien Ville de Paris</strong></a></li>}
                     {data.contact_url && data.contact_url_text && <li><a href={data.contact_url}>{data.contact_url_text}</a></li>}
+                    {data.url && <li><a href={data.url}><strong>Lien Ville de Paris</strong></a></li>}
                 </ul>
                 <br />
-                {data.qfap_tags && <p><strong>Type d'événement:</strong> {data.qfap_tags}</p>}
-                {data.audience && <p><strong>Type de public:</strong> {data.audience}</p>}
+                {/* {data.qfap_tags && <p><strong>Type d'événement:</strong> {data.qfap_tags}</p>} */}
                 {data.date_start && <p><strong>Date début événement:</strong> {CleanDate(data.date_start)}</p>}
                 {data.date_end && <p><strong>Date fin événement:</strong> {CleanDate(data.date_end)}</p>}
-                {data.updated_at && <p><strong>Mise à jour de l'article:</strong> {CleanDate(data.updated_at)}</p>}
+                <br />
+                {data.updated_at && <p><strong>Publié le</strong> {CleanDate(data.updated_at)}</p>}
             </div>
         </div>
     )

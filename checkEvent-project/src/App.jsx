@@ -74,9 +74,9 @@ export default function App() {
   if (loading) return <div className="App">Chargement des événements...</div>
 
   return (
-    <div className='Page bg-repeat bg-[url(./assets/star.svg)]'>
+    <div className='Page bg-repeat bg-[url(./assets/star.svg)] lg:w-full '>
       <NavBar search={search} setSearch={setSearch} />
-         <FilterTheme />
+         <FilterTheme className='place-self-center' />
          <Calendar/>
       <ul className=" Cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 p-8">
         {filterData.map((data, index) => (

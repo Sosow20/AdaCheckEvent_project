@@ -12,11 +12,11 @@ export function Button({ description}) {
 
 
   return (
-    <div className="descrpBox bg-[#ff9e27b0] p-2 flex flex-col rounded-lg">
-      <h1 className='place-self-center'> <strong>Description</strong></h1>
+    <div className="descrpBox bg-[#ff9e27b0] p-2 flex flex-col rounded-lg gap-2">
+      <h1 className='place-self-center bg-white p-1 rounded-lg'> <strong>LISEZ-MOI 😍</strong></h1>
       <div>{isOpen ? parse(description) : parse(preview)}</div>
       <button className='cursor-pointer p-2 rounded-sm bg-[#1B3238] text-white' onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? "See less" : "See more"}
+        {isOpen ? "Voir moins" : "Voir plus"}
       </button>
     </div>
   );

@@ -1,7 +1,7 @@
 function FilterTheme() {
 
   return (
-    <div className='flex flex-wrap gap-2 sm:gap-3 justify-center pt-6 sm:pt-8 px-2'>
+    <div className='flex flex-wrap gap-2 sm:gap-3 justify-center p-3'>
     
 
       <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold text-lg py-4 px-8 border border-gray-400 rounded shadow inline-flex gap-1 items-center m-1 ">Sports
