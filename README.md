@@ -1,1 +1,1 @@
-# frida-adaCheckEvent-Josephine-Sofia
+# frida-adaCheckEvent project by Josephine-Sofia

@@ -10,7 +10,10 @@ export default function NavBar({ search, setSearch }) {
     return (
         <>
             <div className="navBar sticky border-b-2 border-[#ff9e27] bg-[#1B3238] flex justify-between overflow-auto items-center-safe gap-4 p-4">
-                <h1 className=" logo font-bold text-white lg:text-3xl md:text-2xl sm:text-xl "> <span className="text-[#38B0EC]">ADA</span> CHECK<span className="text-[#ff9e27]">EVENT</span></h1>
+                <div>
+                <h1 className=" logo font-bold text-white lg:text-3xl md:text-2xl sm:text-xl "> <span className="text-[#38B0EC]">ADA </span>CHECK<span className="text-[#ff9e27]">EVENT</span></h1>
+                {/* <p className="text-white lg:text-sm md:text-sm sm:text-xs font-bold">Suivez vos événement où que vous soyez</p> */}
+                </div>
                 <div className="searchBox">
                     <input value={search} type="text" placeholder="Rechercher événement ..." onChange={handleOnChange} className="bg-white border-3 border-[#ff9e27] p-2 rounded-lg lg:w-lg md:w-md sm:w-sm" />
                 </div>
@@ -37,6 +40,6 @@ export default function NavBar({ search, setSearch }) {
 }
 
 // #1B3238 dark
-// #38609A mid drak
+// #38609A mid dark
 // #38B0EC light
 
